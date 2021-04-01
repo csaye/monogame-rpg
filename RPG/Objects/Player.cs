@@ -21,7 +21,16 @@ namespace RPG.Objects
             ProcessKeyboardState(game);
 
             // Update position
-            Position += movementDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
+            Vector2 movementFactor = movementDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
+            Rectangle newBounds = Bounds;
+            newBounds.X += (int)movementFactor.X;
+            newBounds.Y += (int)movementFactor.Y;
+            // If new position not obstructed
+            if (!game.ObjectManager.BoundsObstructed(this, newBounds))
+            {
+                // Move position
+                Position += movementFactor;
+            }
         }
 
         private void ProcessKeyboardState(Game1 game)

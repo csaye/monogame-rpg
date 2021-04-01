@@ -29,5 +29,21 @@ namespace RPG.Objects
         {
             gameObjects.Add(obj);
         }
+
+        // Returns whether bounds is obstructed
+        public bool BoundsObstructed(GameObject movingObj, Rectangle bounds)
+        {
+            foreach (GameObject obj in gameObjects)
+            {
+                // Skip self
+                if (movingObj == obj) continue;
+
+                // Return true if bounds intersects object bounds
+                if (bounds.Intersects(obj.Bounds)) return true;
+            }
+
+            // If no objects intersect, return false
+            return false;
+        }
     }
 }

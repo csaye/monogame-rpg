@@ -17,7 +17,7 @@ namespace RPG
         private const int Width = 16;
         private const int Height = 16;
 
-        ObjectManager objectManager = new ObjectManager();
+        public ObjectManager ObjectManager { get; } = new ObjectManager();
 
         public Game1()
         {
@@ -32,8 +32,8 @@ namespace RPG
             graphics.PreferredBackBufferHeight = Grid * Height;
             graphics.ApplyChanges();
 
-            objectManager.Add(new Player(0, 0));
-            objectManager.Add(new Rock(Grid * 4, Grid * 4));
+            ObjectManager.Add(new Player(0, 0));
+            ObjectManager.Add(new Rock(Grid * 4, Grid * 4));
             
             base.Initialize();
         }
@@ -52,7 +52,7 @@ namespace RPG
             KeyboardState = Keyboard.GetState();
 
             // Update objects
-            objectManager.Update(gameTime, this);
+            ObjectManager.Update(gameTime, this);
 
             base.Update(gameTime);
         }
@@ -64,7 +64,7 @@ namespace RPG
             SpriteBatch.Begin(SpriteSortMode.BackToFront);
 
             // Draw objects
-            objectManager.Draw(this);
+            ObjectManager.Draw(this);
 
             SpriteBatch.End();
 
