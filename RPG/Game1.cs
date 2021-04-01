@@ -1,19 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RPG.Objects;
 
 namespace RPG
 {
     public class Game1 : Game
     {
         private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        public SpriteBatch SpriteBatch { get; private set; }
 
         private Vector2 movementDirection = new Vector2(0, 0);
         private Vector2 playerPosition = new Vector2(0, 0);
         private float movementSpeed = 0.1f;
 
-        Texture2D playerTexture;
+        //private Texture2D playerTexture;
+        private Texture2D rockTexture;
+
+        private const int Grid = 32;
+        private const int Width = 16;
+        private const int Height = 16;
+
+        ObjectManager objectManager = new ObjectManager();
 
         public Game1()
         {
@@ -24,14 +32,21 @@ namespace RPG
 
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferWidth = Grid * Width;
+            graphics.PreferredBackBufferHeight = Grid * Height;
+            graphics.ApplyChanges();
+
+            objectManager.Add(new Rock(Grid * 4, Grid * 4));
+            
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            playerTexture = Content.Load<Texture2D>("Computeroid");
+            //playerTexture = Content.Load<Texture2D>("Computeroid");
+            rockTexture = Content.Load<Texture2D>("Rock");
         }
 
         protected override void Update(GameTime gameTime)
@@ -48,12 +63,15 @@ namespace RPG
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            SpriteBatch.Begin();
 
             // Draw player
-            spriteBatch.Draw(playerTexture, playerPosition, Color.White);
+            //SpriteBatch.Draw(playerTexture, playerPosition, Color.White);
 
-            spriteBatch.End();
+            // Draw objects
+            objectManager.Draw(this);
+
+            SpriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -75,6 +93,9 @@ namespace RPG
             if (state.IsKeyDown(Keys.D)) movementDirection.X = 1;
             else if (state.IsKeyDown(Keys.A)) movementDirection.X = -1;
             else movementDirection.X = 0;
+
+            // Normalize movement direction
+            if (movementDirection.Length() > 1) movementDirection.Normalize();
         }
     }
 }

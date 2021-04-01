@@ -16,5 +16,10 @@ namespace RPG.Objects
                 obj.Draw(game);
             }
         }
+
+        public void Add(GameObject obj)
+        {
+            gameObjects.Add(obj);
+        }
     }
 }
