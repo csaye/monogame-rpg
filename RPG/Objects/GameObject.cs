@@ -5,8 +5,8 @@ namespace RPG.Objects
     public abstract class GameObject
     {
         // Position
-        public float X { get; private set; }
-        public float Y { get; private set; }
+        public float X { get; set; }
+        public float Y { get; set; }
         public Vector2 Position
         {
             get { return new Vector2(X, Y); }
@@ -14,8 +14,8 @@ namespace RPG.Objects
         }
 
         // Size
-        public int W { get; private set; }
-        public int H { get; private set; }
+        public int W { get; set; }
+        public int H { get; set; }
         public Vector2 Size
         {
             get { return new Vector2(W, H); }

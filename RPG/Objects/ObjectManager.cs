@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace RPG.Objects
@@ -31,19 +32,47 @@ namespace RPG.Objects
         }
 
         // Returns whether bounds is obstructed
-        public bool BoundsObstructed(GameObject movingObj, Rectangle bounds)
+        public Vector2 TryMove(GameObject movingObj, Vector2 movementFactor)
         {
+            // Get new bounds
+            Rectangle newBounds = movingObj.Bounds;
+            newBounds.X += (int)movementFactor.X;
+            newBounds.Y += (int)movementFactor.Y;
+
+            // For each object
             foreach (GameObject obj in gameObjects)
             {
                 // Skip self
                 if (movingObj == obj) continue;
 
-                // Return true if bounds intersects object bounds
-                if (bounds.Intersects(obj.Bounds)) return true;
+                // If new bounds intersects, adjust bounds
+                Rectangle objBounds = obj.Bounds;
+                if (newBounds.Intersects(objBounds))
+                {
+                    Point newCenter = newBounds.Center;
+                    Point objCenter = objBounds.Center;
+
+                    // If greater horizontal displacement
+                    if (Math.Abs(newCenter.X - objCenter.X) > Math.Abs(newCenter.Y - objCenter.Y))
+                    {
+                        // If right of object
+                        if (newCenter.X > objCenter.X) newBounds.X = objBounds.Right;
+                        // If left of object
+                        else newBounds.X = objBounds.Left - newBounds.Width;
+                    }
+                    // If greater vertical displacement
+                    else
+                    {
+                        // If above object
+                        if (newCenter.Y > objCenter.Y) newBounds.Y = objBounds.Bottom;
+                        // If below object
+                        else newBounds.Y = objBounds.Top - newBounds.Height;
+                    }
+                }
             }
 
-            // If no objects intersect, return false
-            return false;
+            // Return new bounds position
+            return new Vector2(newBounds.X, newBounds.Y);
         }
     }
 }

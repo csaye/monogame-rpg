@@ -13,9 +13,9 @@ namespace RPG
 
         private Texture2D rockTexture;
 
-        private const int Grid = 32;
-        private const int Width = 16;
-        private const int Height = 16;
+        public int Grid { get; } = 32;
+        public int Width { get; } = 16 * 32;
+        public int Height { get; } = 16 * 32;
 
         public ObjectManager ObjectManager { get; } = new ObjectManager();
 
@@ -28,13 +28,14 @@ namespace RPG
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = Grid * Width;
-            graphics.PreferredBackBufferHeight = Grid * Height;
+            graphics.PreferredBackBufferWidth = Width;
+            graphics.PreferredBackBufferHeight = Height;
             graphics.ApplyChanges();
 
             ObjectManager.Add(new Player(0, 0));
             ObjectManager.Add(new Rock(Grid * 4, Grid * 4));
-            
+            ObjectManager.Add(new Rock(Grid * 6, Grid * 4));
+
             base.Initialize();
         }
 

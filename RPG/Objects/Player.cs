@@ -22,15 +22,13 @@ namespace RPG.Objects
 
             // Update position
             Vector2 movementFactor = movementDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
-            Rectangle newBounds = Bounds;
-            newBounds.X += (int)movementFactor.X;
-            newBounds.Y += (int)movementFactor.Y;
-            // If new position not obstructed
-            if (!game.ObjectManager.BoundsObstructed(this, newBounds))
-            {
-                // Move position
-                Position += movementFactor;
-            }
+            Position = game.ObjectManager.TryMove(this, movementFactor);
+
+            // Constrain to screen bounds
+            if (X > game.Width - W) X = game.Width - W;
+            else if (X < 0) X = 0;
+            if (Y > game.Height - H) Y = game.Width - H;
+            else if (Y < 0) Y = 0;
         }
 
         private void ProcessKeyboardState(Game1 game)
