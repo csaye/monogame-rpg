@@ -17,6 +17,14 @@ namespace RPG.Objects
             }
         }
 
+        public void Update(GameTime gameTime, Game1 game)
+        {
+            foreach (GameObject obj in gameObjects)
+            {
+                obj.Update(gameTime, game);
+            }
+        }
+
         public void Add(GameObject obj)
         {
             gameObjects.Add(obj);

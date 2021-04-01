@@ -9,12 +9,8 @@ namespace RPG
     {
         private GraphicsDeviceManager graphics;
         public SpriteBatch SpriteBatch { get; private set; }
+        public KeyboardState KeyboardState { get; private set; }
 
-        private Vector2 movementDirection = new Vector2(0, 0);
-        private Vector2 playerPosition = new Vector2(0, 0);
-        private float movementSpeed = 0.1f;
-
-        //private Texture2D playerTexture;
         private Texture2D rockTexture;
 
         private const int Grid = 32;
@@ -36,6 +32,7 @@ namespace RPG
             graphics.PreferredBackBufferHeight = Grid * Height;
             graphics.ApplyChanges();
 
+            objectManager.Add(new Player(0, 0));
             objectManager.Add(new Rock(Grid * 4, Grid * 4));
             
             base.Initialize();
@@ -51,10 +48,11 @@ namespace RPG
 
         protected override void Update(GameTime gameTime)
         {
-            ProcessKeyboardState();
+            // Get keyboard state
+            KeyboardState = Keyboard.GetState();
 
-            // Update player position
-            playerPosition += movementDirection * gameTime.ElapsedGameTime.Milliseconds * movementSpeed;
+            // Update objects
+            objectManager.Update(gameTime, this);
 
             base.Update(gameTime);
         }
@@ -63,10 +61,7 @@ namespace RPG
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin();
-
-            // Draw player
-            //SpriteBatch.Draw(playerTexture, playerPosition, Color.White);
+            SpriteBatch.Begin(SpriteSortMode.BackToFront);
 
             // Draw objects
             objectManager.Draw(this);
@@ -74,28 +69,6 @@ namespace RPG
             SpriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        private void ProcessKeyboardState()
-        {
-            // Get keyboard state
-            KeyboardState state = Keyboard.GetState();
-
-            // Exit game
-            if (state.IsKeyDown(Keys.Escape)) Exit();
-
-            // Get vertical movement
-            if (state.IsKeyDown(Keys.S)) movementDirection.Y = 1;
-            else if (state.IsKeyDown(Keys.W)) movementDirection.Y = -1;
-            else movementDirection.Y = 0;
-
-            // Get horizontal movement
-            if (state.IsKeyDown(Keys.D)) movementDirection.X = 1;
-            else if (state.IsKeyDown(Keys.A)) movementDirection.X = -1;
-            else movementDirection.X = 0;
-
-            // Normalize movement direction
-            if (movementDirection.Length() > 1) movementDirection.Normalize();
         }
     }
 }
