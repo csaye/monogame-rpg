@@ -6,7 +6,7 @@ namespace RPG.Objects
     public class Player : GameObject
     {
         private Vector2 movementDirection = new Vector2(0, 0);
-        private float movementSpeed = 100;
+        private float movementSpeed = 120;
 
         public Player(int x, int y) : base(x, y, 32, 32) {}
 
@@ -19,8 +19,10 @@ namespace RPG.Objects
         {
             ProcessKeyboardState(game.KeyboardState);
 
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             // Update position
-            Vector2 movementFactor = movementDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
+            Vector2 movementFactor = movementDirection * delta * movementSpeed;
             Position = game.ObjectManager.TryMove(this, movementFactor);
 
             // Constrain to screen bounds

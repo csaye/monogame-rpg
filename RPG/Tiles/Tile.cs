@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RPG.Tiles
 {
     public class Tile
     {
         // Position
-        public TileType TileType { get; set; }
+        public Texture2D Tileset { get; set; }
+        public Vector2 TilesetPos { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -15,16 +17,17 @@ namespace RPG.Tiles
             get { return new Rectangle(X, Y, Drawing.Grid, Drawing.Grid); }
         }
 
-        public Tile(TileType tileType, int x, int y)
+        public Tile(Texture2D tileset, Vector2 tilesetPos, int x, int y)
         {
-            TileType = tileType;
+            Tileset = tileset;
+            TilesetPos = tilesetPos;
             X = x;
             Y = y;
         }
 
         public void Draw(Game1 game)
         {
-            Drawing.DrawTile(TileType, Bounds, game, SortingLayers.Tiles);
+            Drawing.DrawTile(Tileset, TilesetPos, Bounds, game, SortingLayers.Tiles);
         }
     }
 }

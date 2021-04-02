@@ -1,6 +1,6 @@
-﻿using RPG.Objects;
+﻿using Microsoft.Xna.Framework;
+using RPG.Objects;
 using RPG.Tiles;
-using System;
 
 namespace RPG.Scenes
 {
@@ -13,13 +13,7 @@ namespace RPG.Scenes
             {
                 for (int y = 0; y < Drawing.Height; y += Drawing.Grid)
                 {
-                    float val = Math.Abs((x / Drawing.Grid) - (y / Drawing.Grid));
-                    TileType tileType;
-                    if (val > 10) tileType = TileType.Grass;
-                    else if (val > 6) tileType = TileType.Dirt;
-                    else if (val > 2) tileType = TileType.Water;
-                    else tileType = TileType.Sand;
-                    TileManager.Add(new Tile(tileType, x, y));
+                    TileManager.Add(new Tile(Drawing.TilesTexture, new Vector2(0, 0), x, y));
                 }
             }
 
