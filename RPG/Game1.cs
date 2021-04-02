@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RPG.Objects;
+using RPG.Scenes;
 
 namespace RPG
 {
@@ -11,13 +12,18 @@ namespace RPG
         public SpriteBatch SpriteBatch { get; private set; }
         public KeyboardState KeyboardState { get; private set; }
 
-        private Texture2D rockTexture;
+        public ObjectManager ObjectManager
+        {
+            get { return SceneManager.CurrentScene.ObjectManager; }
+        }
+
+        //private Texture2D rockTexture;
 
         public int Grid { get; } = 32;
         public int Width { get; } = 16 * 32;
         public int Height { get; } = 16 * 32;
 
-        public ObjectManager ObjectManager { get; } = new ObjectManager();
+        public SceneManager SceneManager { get; } = new SceneManager();
 
         public Game1()
         {
@@ -32,9 +38,8 @@ namespace RPG
             graphics.PreferredBackBufferHeight = Height;
             graphics.ApplyChanges();
 
-            ObjectManager.Add(new Player(0, 0));
-            ObjectManager.Add(new Rock(Grid * 4, Grid * 4));
-            ObjectManager.Add(new Rock(Grid * 6, Grid * 4));
+            // Initialize scene manager with menu
+            SceneManager.CurrentScene = new Main();
 
             base.Initialize();
         }
@@ -44,32 +49,43 @@ namespace RPG
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             //playerTexture = Content.Load<Texture2D>("Computeroid");
-            rockTexture = Content.Load<Texture2D>("Rock");
+            //rockTexture = Content.Load<Texture2D>("Rock");
         }
 
         protected override void Update(GameTime gameTime)
         {
             // Get keyboard state
             KeyboardState = Keyboard.GetState();
+            ProcessKeyboardState(KeyboardState);
 
-            // Update objects
-            ObjectManager.Update(gameTime, this);
+            SceneManager.Update(gameTime, this);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            // Clear graphics
+            GraphicsDevice.Clear(Color.Black);
 
             SpriteBatch.Begin(SpriteSortMode.BackToFront);
 
-            // Draw objects
-            ObjectManager.Draw(this);
+            // Draw current scene
+            SceneManager.Draw(this);
 
             SpriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void ProcessKeyboardState(KeyboardState state)
+        {
+            // Exit game
+            if (state.IsKeyDown(Keys.Escape)) Exit();
+
+            // Load scene
+            if (state.IsKeyDown(Keys.D1)) SceneManager.CurrentScene = new Menu();
+            else if (state.IsKeyDown(Keys.D2)) SceneManager.CurrentScene = new Main();
         }
     }
 }

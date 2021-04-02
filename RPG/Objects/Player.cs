@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using RPG.Utility;
 
 namespace RPG.Objects
 {
@@ -9,7 +8,7 @@ namespace RPG.Objects
         private Vector2 movementDirection = new Vector2(0, 0);
         private float movementSpeed = 100;
 
-        public Player(float x, float y) : base(x, y, 32, 32) { }
+        public Player(float x, float y) : base(x, y, 32, 32) {}
 
         public override void Draw(Game1 game)
         {
@@ -18,7 +17,7 @@ namespace RPG.Objects
 
         public override void Update(GameTime gameTime, Game1 game)
         {
-            ProcessKeyboardState(game);
+            ProcessKeyboardState(game.KeyboardState);
 
             // Update position
             Vector2 movementFactor = movementDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
@@ -31,13 +30,8 @@ namespace RPG.Objects
             else if (Y < 0) Y = 0;
         }
 
-        private void ProcessKeyboardState(Game1 game)
+        private void ProcessKeyboardState(KeyboardState state)
         {
-            KeyboardState state = game.KeyboardState;
-
-            // Exit game
-            if (state.IsKeyDown(Keys.Escape)) game.Exit();
-
             // Get vertical movement
             if (state.IsKeyDown(Keys.S)) movementDirection.Y = 1;
             else if (state.IsKeyDown(Keys.W)) movementDirection.Y = -1;
