@@ -1,16 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RPG.Tiles;
 
 namespace RPG
 {
     public static class Drawing
     {
-        public static int Grid { get; } = 32;
-        public static int Width { get; } = 16 * 32;
-        public static int Height { get; } = 16 * 32;
+        // Size of grid
+        public const int Grid = 32;
+        // Width and height of grid
+        public const int GridWidth = 16;
+        public const int GridHeight = 16;
+        // Width and height of screen
+        public const int Width = GridWidth * Grid;
+        public const int Height = GridHeight * Grid;
 
-        public static int TileGrid { get; } = 16;
+        // Size of tile grid
+        public const int TileGrid = 16;
 
         private static Texture2D blankTexture;
         private static SpriteFont arialFont;
@@ -43,9 +48,13 @@ namespace RPG
             game.SpriteBatch.Draw(texture, rect, null, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, depth);
         }
 
-        public static void DrawTile(Texture2D tileset, Vector2 tilesetPos, Rectangle rect, Game1 game, float depth)
+        public static void DrawTile(Texture2D tileset, int tilesetIndex, Rectangle rect, Game1 game, float depth)
         {
-            Rectangle sourceRect = new Rectangle((int)tilesetPos.X * TileGrid, (int)tilesetPos.Y * TileGrid, TileGrid, TileGrid);
+            // Calculate source position
+            int tilesetWidth = tileset.Width / TileGrid;
+            int tilesetX = tilesetIndex % tilesetWidth;
+            int tilesetY = tilesetIndex / tilesetWidth;
+            Rectangle sourceRect = new Rectangle(tilesetX * TileGrid, tilesetY * TileGrid, TileGrid, TileGrid);
             game.SpriteBatch.Draw(tileset, rect, sourceRect, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, depth);
         }
 

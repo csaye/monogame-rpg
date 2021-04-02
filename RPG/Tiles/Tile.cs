@@ -7,7 +7,7 @@ namespace RPG.Tiles
     {
         // Position
         public Texture2D Tileset { get; set; }
-        public Vector2 TilesetPos { get; set; }
+        public int TilesetIndex { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -17,17 +17,17 @@ namespace RPG.Tiles
             get { return new Rectangle(X, Y, Drawing.Grid, Drawing.Grid); }
         }
 
-        public Tile(Texture2D tileset, Vector2 tilesetPos, int x, int y)
+        public Tile(Texture2D tileset, int tilesetIndex, int x, int y)
         {
             Tileset = tileset;
-            TilesetPos = tilesetPos;
+            TilesetIndex = tilesetIndex;
             X = x;
             Y = y;
         }
 
         public void Draw(Game1 game)
         {
-            Drawing.DrawTile(Tileset, TilesetPos, Bounds, game, SortingLayers.Tiles);
+            Drawing.DrawTile(Tileset, TilesetIndex, Bounds, game, SortingLayers.Tiles);
         }
     }
 }
