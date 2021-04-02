@@ -4,6 +4,7 @@
     {
         public const float Tiles = 1;
         public const float Objects = 0.5f;
-        public const float Player = 0;
+        public const float Player = 0.25f;
+        public const float Text = 0;
     }
 }

@@ -10,6 +10,7 @@ namespace RPG
         public static int Height { get; } = 16 * 32;
 
         private static Texture2D blankTexture;
+        private static SpriteFont arialFont;
 
         public static void InitializeGraphics(Game1 game)
         {
@@ -19,6 +20,8 @@ namespace RPG
 
             blankTexture = new Texture2D(game.GraphicsDevice, 1, 1);
             blankTexture.SetData(new[] { Color.White });
+
+            arialFont = game.Content.Load<SpriteFont>("Arial");
         }
 
         public static void DrawRect(Rectangle rect, Color color, Game1 game, float depth)
@@ -29,6 +32,11 @@ namespace RPG
         public static void DrawSprite(Texture2D texture, Rectangle rect, Game1 game, float depth)
         {
             game.SpriteBatch.Draw(texture, rect, null, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, depth);
+        }
+
+        public static void DrawText(string text, Vector2 position, Color color, Game1 game, float depth)
+        {
+            game.SpriteBatch.DrawString(arialFont, text, position, color, 0, new Vector2(0, 0), 1, SpriteEffects.None, depth);
         }
     }
 }

@@ -1,12 +1,16 @@
-﻿using RPG.Objects;
+﻿using Microsoft.Xna.Framework;
 
 namespace RPG.Scenes
 {
     public class Menu : Scene
     {
-        public Menu()
+        public Menu() {}
+
+        public override void Draw(Game1 game)
         {
-            ObjectManager.Add(new Rock(0, 0));
+            Drawing.DrawText("Press 2 to start", new Vector2(0, 0), Color.White, game, SortingLayers.Text);
+
+            base.Draw(game);
         }
     }
 }
