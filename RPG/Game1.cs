@@ -8,7 +8,7 @@ namespace RPG
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager Graphics { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
         public KeyboardState KeyboardState { get; private set; }
 
@@ -19,27 +19,21 @@ namespace RPG
 
         //private Texture2D rockTexture;
 
-        public int Grid { get; } = 32;
-        public int Width { get; } = 16 * 32;
-        public int Height { get; } = 16 * 32;
-
         public SceneManager SceneManager { get; } = new SceneManager();
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = Width;
-            graphics.PreferredBackBufferHeight = Height;
-            graphics.ApplyChanges();
+            Drawing.InitializeGraphics(this);
 
             // Initialize scene manager with menu
-            SceneManager.CurrentScene = new Main();
+            SceneManager.CurrentScene = new Menu();
 
             base.Initialize();
         }

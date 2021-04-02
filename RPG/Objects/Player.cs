@@ -24,9 +24,9 @@ namespace RPG.Objects
             Position = game.ObjectManager.TryMove(this, movementFactor);
 
             // Constrain to screen bounds
-            if (X > game.Width - W) X = game.Width - W;
+            if (X > Drawing.Width - W) X = Drawing.Width - W;
             else if (X < 0) X = 0;
-            if (Y > game.Height - H) Y = game.Width - H;
+            if (Y > Drawing.Height - H) Y = Drawing.Width - H;
             else if (Y < 0) Y = 0;
         }
 

@@ -29,7 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />
-    <Folder Include="Utility\" />
     <Folder Include="Scenes\" />
   </ItemGroup>
 </Project>
