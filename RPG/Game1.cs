@@ -66,7 +66,7 @@ namespace RPG
             // Clear graphics
             GraphicsDevice.Clear(Color.Black);
 
-            SpriteBatch.Begin(SpriteSortMode.BackToFront);
+            SpriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
 
             // Draw scene
             SceneManager.Draw(this);
