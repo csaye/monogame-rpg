@@ -8,18 +8,19 @@ namespace RPG
 {
     public class Game1 : Game
     {
+        // MonoGame objects
         public GraphicsDeviceManager Graphics { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
         public KeyboardState KeyboardState { get; private set; }
 
+        // RPG objects
+        public SceneManager SceneManager { get; } = new SceneManager();
+
+        // Getters
         public ObjectManager ObjectManager
         {
             get { return SceneManager.CurrentScene.ObjectManager; }
         }
-
-        //private Texture2D rockTexture;
-
-        public SceneManager SceneManager { get; } = new SceneManager();
 
         public Game1()
         {
@@ -30,6 +31,7 @@ namespace RPG
 
         protected override void Initialize()
         {
+            // Initialize graphics
             Drawing.InitializeGraphics(this);
 
             // Initialize scene manager with menu
@@ -40,10 +42,11 @@ namespace RPG
 
         protected override void LoadContent()
         {
+            // Initialize sprite batch
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //playerTexture = Content.Load<Texture2D>("Computeroid");
-            //rockTexture = Content.Load<Texture2D>("Rock");
+            // Load textures
+            Textures.LoadTextures(this);
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,6 +55,7 @@ namespace RPG
             KeyboardState = Keyboard.GetState();
             ProcessKeyboardState(KeyboardState);
 
+            // Update scene
             SceneManager.Update(gameTime, this);
 
             base.Update(gameTime);
@@ -64,7 +68,7 @@ namespace RPG
 
             SpriteBatch.Begin(SpriteSortMode.BackToFront);
 
-            // Draw current scene
+            // Draw scene
             SceneManager.Draw(this);
 
             SpriteBatch.End();
