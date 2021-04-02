@@ -2,9 +2,10 @@
 
 namespace RPG.Tiles
 {
-    public abstract class Tile
+    public class Tile
     {
         // Position
+        public TileType TileType { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -14,12 +15,16 @@ namespace RPG.Tiles
             get { return new Rectangle(X, Y, Drawing.Grid, Drawing.Grid); }
         }
 
-        public Tile(int x, int y)
+        public Tile(TileType tileType, int x, int y)
         {
+            TileType = tileType;
             X = x;
             Y = y;
         }
 
-        public abstract void Draw(Game1 game);
+        public void Draw(Game1 game)
+        {
+            Drawing.DrawTile(TileType, Bounds, game, SortingLayers.Tiles);
+        }
     }
 }
