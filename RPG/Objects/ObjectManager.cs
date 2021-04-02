@@ -26,10 +26,7 @@ namespace RPG.Objects
             }
         }
 
-        public void Add(GameObject obj)
-        {
-            gameObjects.Add(obj);
-        }
+        public void Add(GameObject obj) => gameObjects.Add(obj);
 
         // Returns whether bounds is obstructed
         public Vector2 TryMove(GameObject movingObj, Vector2 movementFactor)

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using RPG.Utility;
 
 namespace RPG.Objects
 {

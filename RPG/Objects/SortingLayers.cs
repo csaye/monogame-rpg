@@ -1,4 +1,4 @@
-﻿namespace RPG.Utility
+﻿namespace RPG.Objects
 {
     public static class SortingLayers
     {
