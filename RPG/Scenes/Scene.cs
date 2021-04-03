@@ -10,8 +10,8 @@ namespace RPG.Scenes
         public TileManager TileManager { get; } = new TileManager();
         public Camera Camera { get; protected set; }
 
-        public abstract int Width { get; }
-        public abstract int Height { get; }
+        public int Width { get; protected set;  }
+        public int Height { get; protected set; }
 
         public Scene() {}
 
