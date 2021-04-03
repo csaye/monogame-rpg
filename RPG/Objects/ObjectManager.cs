@@ -33,10 +33,12 @@ namespace RPG.Objects
         // Returns calculated position for object attempting to move
         public Vector2 TryMove(GameObject movingObj, Vector2 movementFactor)
         {
+            // Get position
+            Vector2 position = movingObj.Position + movementFactor;
             // Get new bounds
             Rectangle newBounds = movingObj.Bounds;
-            newBounds.X += (int)Math.Round(movementFactor.X);
-            newBounds.Y += (int)Math.Round(movementFactor.Y);
+            newBounds.X += (int)movementFactor.X;
+            newBounds.Y += (int)movementFactor.Y;
 
             // For each object
             foreach (GameObject obj in gameObjects)
@@ -55,23 +57,23 @@ namespace RPG.Objects
                     if (Math.Abs(newCenter.X - objCenter.X) > Math.Abs(newCenter.Y - objCenter.Y))
                     {
                         // If right of object
-                        if (newCenter.X > objCenter.X) newBounds.X = objBounds.Right;
+                        if (newCenter.X > objCenter.X) position.X = newBounds.X = objBounds.Right;
                         // If left of object
-                        else newBounds.X = objBounds.Left - newBounds.Width;
+                        else position.X = newBounds.X = objBounds.Left - newBounds.Width;
                     }
                     // If greater vertical displacement
                     else
                     {
                         // If above object
-                        if (newCenter.Y > objCenter.Y) newBounds.Y = objBounds.Bottom;
+                        if (newCenter.Y > objCenter.Y) position.Y = newBounds.Y = objBounds.Bottom;
                         // If below object
-                        else newBounds.Y = objBounds.Top - newBounds.Height;
+                        else position.Y = newBounds.Y = objBounds.Top - newBounds.Height;
                     }
                 }
             }
 
-            // Return new bounds position
-            return new Vector2(newBounds.X, newBounds.Y);
+            // Return new position
+            return position;
         }
     }
 }

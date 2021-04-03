@@ -5,30 +5,30 @@ namespace RPG.Objects
     public abstract class GameObject
     {
         // Position
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
         public Vector2 Position
         {
-            get { return new Vector2(X, Y); }
-            set { X = (int)value.X; Y = (int)value.Y; }
+            get { return new Vector2(X, Y);  }
+            set { X = value.X; Y = value.Y; }
         }
 
         // Size
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
         public Vector2 Size
         {
             get { return new Vector2(Width, Height); }
-            set { Width = (int)value.X; Height = (int)value.Y; }
+            set { Width = value.X; Height = value.Y; }
         }
 
         // Bounds
         public Rectangle Bounds
         {
-            get { return new Rectangle(X, Y, Width, Height); }
+            get { return new Rectangle(Position.ToPoint(), Size.ToPoint()); }
         }
 
-        public GameObject(int x, int y, int width, int height)
+        public GameObject(float x, float y, float width, float height)
         {
             X = x;
             Y = y;

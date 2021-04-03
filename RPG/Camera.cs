@@ -23,8 +23,8 @@ namespace RPG
             int sceneHeight = game.SceneManager.CurrentScene.Height;
 
             // Clamp target within scene bounds
-            int targetX = Math.Clamp(Target.X + (Target.Width / 2), midWidth, sceneWidth - midWidth);
-            int targetY = Math.Clamp(Target.Y + (Target.Height / 2), midHeight, sceneHeight - midHeight);
+            int targetX = Math.Clamp((int)(Target.X + (Target.Width / 2)), midWidth, sceneWidth - midWidth);
+            int targetY = Math.Clamp((int)(Target.Y + (Target.Height / 2)), midHeight, sceneHeight - midHeight);
 
             // Flip target x and y
             targetX *= -1;
