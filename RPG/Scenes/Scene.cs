@@ -8,6 +8,7 @@ namespace RPG.Scenes
     {
         public ObjectManager ObjectManager { get; } = new ObjectManager();
         public TileManager TileManager { get; } = new TileManager();
+        public Camera Camera { get; protected set; }
 
         public Scene() {}
 
@@ -24,6 +25,9 @@ namespace RPG.Scenes
         {
             // Update objects
             ObjectManager.Update(gameTime, game);
+
+            // Update camera
+            if (Camera != null) Camera.Update(gameTime, game);
         }
     }
 }

@@ -1,15 +1,11 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using RPG.Objects;
+﻿using RPG.Objects;
 using RPG.Tiles;
 
 namespace RPG.Scenes
 {
     public class Main : Scene
     {
-        private Camera camera;
-
-        private int[,] tiles = new int[,]
+        private readonly int[,] tiles = new int[,]
         {
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -46,27 +42,7 @@ namespace RPG.Scenes
             // Initialize player and camera
             Player player = new Player(0, 0);
             ObjectManager.Add(player);
-            camera = new Camera(player);
-        }
-
-        public override void Draw(Game1 game)
-        {
-            game.SpriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp, transformMatrix: camera.Transform);
-
-            // Draw tiles
-            TileManager.Draw(game);
-
-            // Draw objects
-            ObjectManager.Draw(game);
-
-            game.SpriteBatch.End();
-        }
-
-        public override void Update(GameTime gameTime, Game1 game)
-        {
-            camera.Update(gameTime, game);
-
-            base.Update(gameTime, game);
+            Camera = new Camera(player);
         }
     }
 }
