@@ -4,7 +4,7 @@ namespace RPG.Objects
 {
     public class Rock : GameObject
     {
-        public Rock(int x, int y) : base(x, y, 32, 32) {}
+        public Rock(int x, int y) : base(x, y, Drawing.Grid, Drawing.Grid) {}
 
         public override void Draw(Game1 game)
         {

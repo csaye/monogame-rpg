@@ -8,7 +8,7 @@ namespace RPG.Objects
         private Vector2 movementDirection = new Vector2(0, 0);
         private float movementSpeed = 120;
 
-        public Player(int x, int y) : base(x, y, 32, 32) {}
+        public Player(int x, int y) : base(x, y, Drawing.Grid, Drawing.Grid) {}
 
         public override void Draw(Game1 game)
         {

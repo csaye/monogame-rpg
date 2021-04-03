@@ -36,7 +36,7 @@ namespace RPG.Objects
             Height = height;
         }
 
-        public abstract void Draw(Game1 game);
-        public abstract void Update(GameTime gameTime, Game1 game);
+        public abstract void Draw(Game1 game); // Draw object
+        public abstract void Update(GameTime gameTime, Game1 game); // Update object
     }
 }

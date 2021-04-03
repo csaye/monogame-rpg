@@ -66,6 +66,7 @@ namespace RPG
             // Clear graphics
             GraphicsDevice.Clear(Color.Black);
 
+            // Start sprite batch
             SpriteBatch.Begin(
                 SpriteSortMode.BackToFront,
                 null,
@@ -76,6 +77,7 @@ namespace RPG
             // Draw scene
             SceneManager.Draw(this);
 
+            // End sprite batch
             SpriteBatch.End();
 
             base.Draw(gameTime);

@@ -12,6 +12,7 @@ namespace RPG.Objects
 
         public void Draw(Game1 game)
         {
+            // Draw all objects
             foreach (GameObject obj in gameObjects)
             {
                 obj.Draw(game);
@@ -20,21 +21,22 @@ namespace RPG.Objects
 
         public void Update(GameTime gameTime, Game1 game)
         {
+            // Update all objects
             foreach (GameObject obj in gameObjects)
             {
                 obj.Update(gameTime, game);
             }
         }
 
-        public void Add(GameObject obj) => gameObjects.Add(obj);
+        public void Add(GameObject obj) => gameObjects.Add(obj); // Adds given object to objects list
 
-        // Returns whether bounds is obstructed
+        // Returns calculated position for object attempting to move
         public Vector2 TryMove(GameObject movingObj, Vector2 movementFactor)
         {
             // Get new bounds
             Rectangle newBounds = movingObj.Bounds;
-            newBounds.X += (int)movementFactor.X;
-            newBounds.Y += (int)movementFactor.Y;
+            newBounds.X += (int)Math.Round(movementFactor.X);
+            newBounds.Y += (int)Math.Round(movementFactor.Y);
 
             // For each object
             foreach (GameObject obj in gameObjects)
