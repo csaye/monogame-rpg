@@ -25,10 +25,12 @@ namespace RPG.Objects
             Vector2 movementFactor = movementDirection * delta * movementSpeed;
             Position = game.ObjectManager.TryMove(this, movementFactor);
 
-            // Constrain to screen bounds
-            if (X > Drawing.Width - W) X = Drawing.Width - W;
+            // Constrain to scene bounds
+            int sceneWidth = game.SceneManager.CurrentScene.Width;
+            int sceneHeight = game.SceneManager.CurrentScene.Height;
+            if (X > sceneWidth - Width) X = sceneWidth - Width;
             else if (X < 0) X = 0;
-            if (Y > Drawing.Height - H) Y = Drawing.Width - H;
+            if (Y > sceneHeight - Height) Y = sceneHeight - Height;
             else if (Y < 0) Y = 0;
         }
 

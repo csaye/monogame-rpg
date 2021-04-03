@@ -14,26 +14,26 @@ namespace RPG.Objects
         }
 
         // Size
-        public int W { get; set; }
-        public int H { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public Vector2 Size
         {
-            get { return new Vector2(W, H); }
-            set { W = (int)value.X; H = (int)value.Y; }
+            get { return new Vector2(Width, Height); }
+            set { Width = (int)value.X; Height = (int)value.Y; }
         }
 
         // Bounds
         public Rectangle Bounds
         {
-            get { return new Rectangle(X, Y, W, H); }
+            get { return new Rectangle(X, Y, Width, Height); }
         }
 
-        public GameObject(int x, int y, int w, int h)
+        public GameObject(int x, int y, int width, int height)
         {
             X = x;
             Y = y;
-            W = w;
-            H = h;
+            Width = width;
+            Height = height;
         }
 
         public abstract void Draw(Game1 game);
