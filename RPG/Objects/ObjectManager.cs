@@ -6,7 +6,7 @@ namespace RPG.Objects
 {
     public class ObjectManager
     {
-        public List<GameObject> DynamicObjects { get; private set; } = new List<GameObject>();
+        public List<DynamicObject> DynamicObjects { get; private set; } = new List<DynamicObject>();
         public GameObject[,] StaticObjects { get; private set; }
 
         public ObjectManager() {}
@@ -31,7 +31,7 @@ namespace RPG.Objects
             foreach (GameObject obj in DynamicObjects) obj.Update(gameTime, game);
         }
 
-        public void AddDynamic(GameObject obj) => DynamicObjects.Add(obj);
+        public void AddDynamic(DynamicObject obj) => DynamicObjects.Add(obj);
 
         public void InitStatic(int x, int y) => StaticObjects = new GameObject[x, y]; // Initializes object array with given dimensions
         public GameObject GetStatic(int x, int y) => StaticObjects[x, y]; // Gets object at position
@@ -41,17 +41,17 @@ namespace RPG.Objects
         public Vector2 TryMove(GameObject movingObj, Vector2 movementFactor)
         {
             // Get position
-            Vector2 position = movingObj.Position + movementFactor;
+            Vector2 position = movingObj.position + movementFactor;
             // Get new bounds
             Rectangle newBounds = movingObj.Bounds;
             newBounds.X += (int)movementFactor.X;
             newBounds.Y += (int)movementFactor.Y;
 
             // For each adjacent static object within bounds
-            int leftX = newBounds.Left / Drawing.Grid;
-            int rightX = newBounds.Right / Drawing.Grid;
-            int topY = newBounds.Top / Drawing.Grid;
-            int bottomY = newBounds.Bottom / Drawing.Grid;
+            int leftX = Math.Clamp(newBounds.Left / Drawing.Grid, 0, StaticObjects.GetLength(0) - 1);
+            int rightX = Math.Clamp(newBounds.Right / Drawing.Grid, 0, StaticObjects.GetLength(0) - 1);
+            int topY = Math.Clamp(newBounds.Top / Drawing.Grid, 0, StaticObjects.GetLength(1) - 1);
+            int bottomY = Math.Clamp(newBounds.Bottom / Drawing.Grid, 0, StaticObjects.GetLength(1) - 1);
             for (int x = leftX; x <= rightX; x++)
             {
                 for (int y = topY; y <= bottomY; y++)
