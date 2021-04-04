@@ -31,5 +31,6 @@
     <Folder Include="Objects\" />
     <Folder Include="Scenes\" />
     <Folder Include="Tiles\" />
+    <Folder Include="Content\Sprites\" />
   </ItemGroup>
 </Project>
