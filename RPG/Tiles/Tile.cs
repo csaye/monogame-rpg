@@ -6,10 +6,12 @@ namespace RPG.Tiles
     public class Tile
     {
         // Position
-        public Texture2D Tileset { get; set; }
-        public int TilesetIndex { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+
+        // Tileset data
+        public Texture2D Tileset { get; set; }
+        public int TilesetIndex { get; set; }
 
         // Bounds
         public Rectangle Bounds
@@ -17,12 +19,12 @@ namespace RPG.Tiles
             get { return new Rectangle(X, Y, Drawing.Grid, Drawing.Grid); }
         }
 
-        public Tile(Texture2D tileset, int tilesetIndex, int x, int y)
+        public Tile(int x, int y, Texture2D tileset, int tilesetIndex)
         {
-            Tileset = tileset;
-            TilesetIndex = tilesetIndex;
             X = x;
             Y = y;
+            Tileset = tileset;
+            TilesetIndex = tilesetIndex;
         }
 
         public void Draw(Game1 game)
