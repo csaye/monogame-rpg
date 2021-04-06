@@ -1,16 +1,19 @@
-﻿using Microsoft.Xna.Framework;
+﻿using RPG.UI;
 
 namespace RPG.Scenes
 {
     public class Menu : Scene
     {
-        public Menu() {}
-
-        public override void Draw(Game1 game)
+        public Menu()
         {
-            Drawing.DrawText("Press 2 to start", new Vector2(0, 0), Color.White, game, SortingLayers.Text);
+            // Initialize UI
+            UIManager.Add(new Button((Drawing.Width / 2) - 64, (Drawing.Height / 2) - 16, 128, 32, "Click to start", LoadMain));
+        }
 
-            base.Draw(game);
+        private void LoadMain(Game1 game)
+        {
+            // Load main scene
+            game.SceneManager.CurrentScene = new Main();
         }
     }
 }

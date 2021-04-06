@@ -58,7 +58,7 @@ namespace RPG.Scenes
 
             // Initialize objects
             ObjectManager.InitStatic(tilesWidth, tilesHeight);
-            ObjectManager.SetStatic(2, 2, new Rock(2 * Drawing.Grid, 2 * Drawing.Grid));
+            ObjectManager.AddStatic(new Rock(2 * Drawing.Grid, 2 * Drawing.Grid));
             
             // Initialize player and camera
             Player player = new Player(0, 0);

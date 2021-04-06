@@ -14,6 +14,7 @@ namespace RPG
         public KeyboardState KeyboardState { get; private set; }
         public MouseState MouseState { get; private set; }
         public MouseState LastMouseState { get; private set; }
+        public bool LeftMouseButtonClick { get; private set; }
 
         // RPG objects
         public SceneManager SceneManager { get; } = new SceneManager();
@@ -94,12 +95,12 @@ namespace RPG
         {
             // Exit game
             if (KeyboardState.IsKeyDown(Keys.Escape)) Exit();
-
-            // Load scene
-            if (KeyboardState.IsKeyDown(Keys.D1)) SceneManager.CurrentScene = new Menu();
-            else if (KeyboardState.IsKeyDown(Keys.D2)) SceneManager.CurrentScene = new Main();
         }
 
-        private void ProcessMouseState() {}
+        private void ProcessMouseState()
+        {
+            // Left mouse button clicked if released this frame and pressed last frame
+            LeftMouseButtonClick = MouseState.LeftButton == ButtonState.Released && LastMouseState.LeftButton == ButtonState.Pressed;
+        }
     }
 }
