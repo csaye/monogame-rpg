@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using RPG.Objects;
 using RPG.Tiles;
+using RPG.UI;
 
 namespace RPG.Scenes
 {
@@ -8,30 +9,28 @@ namespace RPG.Scenes
     {
         public ObjectManager ObjectManager { get; } = new ObjectManager();
         public TileManager TileManager { get; } = new TileManager();
+        public UIManager UIManager { get; } = new UIManager();
         public Camera Camera { get; protected set; }
 
         // Width and height of scene, used for camera
         public int Width { get; protected set;  }
         public int Height { get; protected set; }
 
-        public Scene() {}
+        public Scene() { }
 
         public virtual void Draw(Game1 game)
         {
-            // Draw tiles
-            TileManager.Draw(game);
-
-            // Draw objects
-            ObjectManager.Draw(game);
+            TileManager.Draw(game); // Draw tiles
+            ObjectManager.Draw(game); // Draw objects
+            UIManager.Draw(game); // Draw UI
         }
 
         public virtual void Update(GameTime gameTime, Game1 game)
         {
-            // Update objects
-            ObjectManager.Update(gameTime, game);
+            ObjectManager.Update(gameTime, game); // Update objects
+            UIManager.Update(gameTime, game); // Update UI
 
-            // Update camera
-            if (Camera != null) Camera.Update(gameTime, game);
+            if (Camera != null) Camera.Update(gameTime, game); // Update camera
         }
     }
 }
