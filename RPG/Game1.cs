@@ -12,6 +12,8 @@ namespace RPG
         public GraphicsDeviceManager Graphics { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
         public KeyboardState KeyboardState { get; private set; }
+        public MouseState MouseState { get; private set; }
+        public MouseState LastMouseState { get; private set; }
 
         // RPG objects
         public SceneManager SceneManager { get; } = new SceneManager();
@@ -51,9 +53,14 @@ namespace RPG
 
         protected override void Update(GameTime gameTime)
         {
-            // Get keyboard state
+            // Process keyboard state
             KeyboardState = Keyboard.GetState();
-            ProcessKeyboardState(KeyboardState);
+            ProcessKeyboardState();
+
+            // Process mouse state
+            LastMouseState = MouseState;
+            MouseState = Mouse.GetState();
+            ProcessMouseState();
 
             // Update scene
             SceneManager.Update(gameTime, this);
@@ -83,14 +90,16 @@ namespace RPG
             base.Draw(gameTime);
         }
 
-        private void ProcessKeyboardState(KeyboardState state)
+        private void ProcessKeyboardState()
         {
             // Exit game
-            if (state.IsKeyDown(Keys.Escape)) Exit();
+            if (KeyboardState.IsKeyDown(Keys.Escape)) Exit();
 
             // Load scene
-            if (state.IsKeyDown(Keys.D1)) SceneManager.CurrentScene = new Menu();
-            else if (state.IsKeyDown(Keys.D2)) SceneManager.CurrentScene = new Main();
+            if (KeyboardState.IsKeyDown(Keys.D1)) SceneManager.CurrentScene = new Menu();
+            else if (KeyboardState.IsKeyDown(Keys.D2)) SceneManager.CurrentScene = new Main();
         }
+
+        private void ProcessMouseState() {}
     }
 }

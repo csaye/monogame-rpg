@@ -8,6 +8,7 @@ namespace RPG
     {
         public GameObject Target { get; set; }
         public Matrix Transform { get; private set; }
+        public Vector2 Position { get; private set; }
 
         public Camera(GameObject target)
         {
@@ -25,6 +26,9 @@ namespace RPG
             // Clamp target within scene bounds
             int targetX = Math.Clamp((int)(Target.position.X + (Target.size.X / 2)), midWidth, sceneWidth - midWidth);
             int targetY = Math.Clamp((int)(Target.position.Y + (Target.size.Y / 2)), midHeight, sceneHeight - midHeight);
+
+            // Get position
+            Position = new Vector2(targetX - midWidth, targetY - midHeight);
 
             // Flip target x and y
             targetX *= -1;
