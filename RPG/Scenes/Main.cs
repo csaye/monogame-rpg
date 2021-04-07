@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using RPG.Objects;
 using RPG.Tiles;
+using RPG.UI;
 
 namespace RPG.Scenes
 {
@@ -64,6 +65,10 @@ namespace RPG.Scenes
             Player player = new Player(0, 0);
             ObjectManager.AddDynamic(player);
             Camera = new Camera(player);
+
+            // Initialize UI
+            Button backButton = new Button(Drawing.Grid / 2, Drawing.Grid / 2, Drawing.Grid / 2, Drawing.Grid / 2, "X", LoadMenu);
+            UIManager.Add(backButton);
         }
 
         public override void Update(GameTime gameTime, Game1 game)
@@ -89,6 +94,12 @@ namespace RPG.Scenes
                 // Set click point to path tile
                 TileManager.SetTile(x, y, new Tile(x * Drawing.Grid, y * Drawing.Grid, Drawing.TilesTexture, 1));
             }
+        }
+
+        private void LoadMenu(Game1 game)
+        {
+            // Load menu scene
+            game.SceneManager.CurrentScene = new Menu();
         }
     }
 }

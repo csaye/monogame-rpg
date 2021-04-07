@@ -13,7 +13,8 @@ namespace RPG.UI
         private Color Color { get; set; } = NormalColor;
         private Action<Game1> ClickAction { get; set; }
 
-        public Button(float x, float y, float width, float height, string text, Action<Game1> clickAction) : base(x, y, width, height)
+        public Button(float centerX, float centerY, float width, float height, string text, Action<Game1> clickAction)
+            : base(centerX, centerY, width, height)
         {
             Text = text;
             ClickAction = clickAction;
@@ -32,6 +33,7 @@ namespace RPG.UI
 
         private void ProcessMouseState(Game1 game)
         {
+            // Get mouse state
             MouseState mouseState = game.MouseState;
             // If mouse hovering
             if (Bounds.Contains(mouseState.Position))
