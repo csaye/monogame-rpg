@@ -27,7 +27,7 @@ namespace RPG.UI
         public override void Draw(Game1 game)
         {
             Drawing.DrawRect(Bounds, Color, game, SortingLayers.SubUI);
-            Drawing.DrawText(Text, position, Color.Black, game, SortingLayers.PostUI);
+            Drawing.DrawText(Text, centerPosition, Color.Black, game, SortingLayers.PostUI, true);
         }
 
         private void ProcessMouseState(Game1 game)

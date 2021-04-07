@@ -7,10 +7,8 @@ namespace RPG.Objects
         protected Vector2 movementDirection;
         protected float movementSpeed;
 
-        public DynamicObject(
-            float x, float y, float width, float height,
-            Vector2 movementDirection, float movementSpeed
-        ) : base(x, y, width, height)
+        public DynamicObject(float x, float y, float width, float height, Vector2 movementDirection, float movementSpeed)
+            : base(x, y, width, height)
         {
             this.movementDirection = movementDirection;
             this.movementSpeed = movementSpeed;

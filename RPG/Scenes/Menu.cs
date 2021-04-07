@@ -7,7 +7,7 @@ namespace RPG.Scenes
         public Menu()
         {
             // Initialize UI
-            UIManager.Add(new Button((Drawing.Width / 2) - 64, (Drawing.Height / 2) - 16, 128, 32, "Click to start", LoadMain));
+            UIManager.Add(new Button(Drawing.Width / 2, Drawing.Height / 2, 128, 32, "Click to start", LoadMain));
         }
 
         private void LoadMain(Game1 game)

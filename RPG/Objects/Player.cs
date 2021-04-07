@@ -6,7 +6,7 @@ namespace RPG.Objects
     public class Player : DynamicObject
     {
         private float elapsedTime = 0;
-        private float frameTime = 0.2f;
+        private const float frameTime = 0.2f;
         private int animFrame = 0;
         private int tilesetIndex = 0;
         private Vector2 lastMovementDirection;

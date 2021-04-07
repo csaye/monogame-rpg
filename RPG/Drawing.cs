@@ -42,11 +42,13 @@ namespace RPG
 
         public static void DrawRect(Rectangle rect, Color color, Game1 game, float depth)
         {
+            // Draw rect to sprite batch
             game.SpriteBatch.Draw(blankTexture, rect, null, color, 0, new Vector2(0, 0), SpriteEffects.None, depth);
         }
 
         public static void DrawSprite(Texture2D texture, Rectangle rect, Game1 game, float depth)
         {
+            // Draw sprite to sprite batch
             game.SpriteBatch.Draw(texture, rect, null, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, depth);
         }
 
@@ -56,12 +58,17 @@ namespace RPG
             int tilesetWidth = tileset.Width / TileGrid;
             int tilesetX = tilesetIndex % tilesetWidth;
             int tilesetY = tilesetIndex / tilesetWidth;
+            // Calculate source rect
             Rectangle sourceRect = new Rectangle(tilesetX * TileGrid, tilesetY * TileGrid, TileGrid, TileGrid);
+            // Draw tile to sprite batch
             game.SpriteBatch.Draw(tileset, rect, sourceRect, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, depth);
         }
 
-        public static void DrawText(string text, Vector2 position, Color color, Game1 game, float depth)
+        public static void DrawText(string text, Vector2 position, Color color, Game1 game, float depth, bool centered)
         {
+            // Modify text position if centering text
+            if (centered) position -= arialFont.MeasureString(text) / 2;
+            // Draw string to sprite batch
             game.SpriteBatch.DrawString(arialFont, text, position, color, 0, new Vector2(0, 0), 1, SpriteEffects.None, depth);
         }
     }
