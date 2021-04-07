@@ -74,18 +74,15 @@ namespace RPG
             // Clear graphics
             GraphicsDevice.Clear(Color.Black);
 
-            // Start sprite batch
-            SpriteBatch.Begin(
-                SpriteSortMode.BackToFront,
-                null,
-                SamplerState.PointClamp,
-                transformMatrix: SceneManager.CurrentScene.Camera?.Transform
-            );
-
-            // Draw scene
+            // Object sprite batch
+            Matrix? transform = SceneManager.CurrentScene.Camera?.Transform;
+            SpriteBatch.Begin(SpriteSortMode. BackToFront,null, SamplerState.PointClamp, transformMatrix: transform);
             SceneManager.Draw(this);
+            SpriteBatch.End();
 
-            // End sprite batch
+            // UI sprite batch
+            SpriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
+            SceneManager.DrawUI(this);
             SpriteBatch.End();
 
             base.Draw(gameTime);

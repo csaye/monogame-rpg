@@ -6,16 +6,10 @@ namespace RPG.Scenes
     {
         public Scene CurrentScene { get; set; }
 
-        public SceneManager() {}
+        public SceneManager() { }
 
-        public void Update(GameTime gameTime, Game1 game)
-        {
-            CurrentScene.Update(gameTime, game);
-        }
-
-        public void Draw(Game1 game1)
-        {
-            CurrentScene.Draw(game1);
-        }
+        public void Update(GameTime gameTime, Game1 game) => CurrentScene.Update(gameTime, game); // Update current scene
+        public void Draw(Game1 game) => CurrentScene.Draw(game); // Draw current scene
+        public void DrawUI(Game1 game) => CurrentScene.DrawUI(game); // Draw current scene UI
     }
 }

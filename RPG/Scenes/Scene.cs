@@ -22,6 +22,10 @@ namespace RPG.Scenes
         {
             TileManager.Draw(game); // Draw tiles
             ObjectManager.Draw(game); // Draw objects
+        }
+
+        public virtual void DrawUI(Game1 game)
+        {
             UIManager.Draw(game); // Draw UI
         }
 
