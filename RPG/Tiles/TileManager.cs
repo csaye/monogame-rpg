@@ -4,7 +4,7 @@
     {
         public Tile[,] Tiles { get; private set; }
 
-        public TileManager() {}
+        public TileManager() { }
 
         public void Draw(Game1 game)
         {

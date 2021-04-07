@@ -18,7 +18,7 @@ namespace RPG
             size = new Vector2(width, height);
         }
 
-        public abstract void Draw(Game1 game); // Draw UI
-        public abstract void Update(GameTime gameTime, Game1 game); // Update UI
+        public abstract void Draw(Game1 game); // Draw object
+        public abstract void Update(GameTime gameTime, Game1 game); // Update object
     }
 }

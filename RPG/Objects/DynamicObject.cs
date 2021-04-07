@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace RPG.Objects
 {
@@ -26,10 +27,8 @@ namespace RPG.Objects
             // Constrain to scene bounds
             int sceneWidth = game.SceneManager.CurrentScene.Width;
             int sceneHeight = game.SceneManager.CurrentScene.Height;
-            if (position.X > sceneWidth - size.X) position.X = sceneWidth - size.X;
-            else if (position.X < 0) position.X = 0;
-            if (position.Y > sceneHeight - size.Y) position.Y = sceneHeight - size.Y;
-            else if (position.Y < 0) position.Y = 0;
+            position.X = Math.Clamp(position.X, 0, sceneWidth - size.X);
+            position.Y = Math.Clamp(position.Y, 0, sceneHeight - size.Y);
         }
     }
 }

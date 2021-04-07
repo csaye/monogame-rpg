@@ -11,7 +11,7 @@ namespace RPG.Objects
         private int tilesetIndex = 0;
         private Vector2 lastMovementDirection;
 
-        public Player(float x, float y) : base(x, y, Drawing.Grid, Drawing.Grid, new Vector2(0, 0), 100) {}
+        public Player(float x, float y) : base(x, y, Drawing.Grid, Drawing.Grid, new Vector2(0, 0), 100) { }
 
         public override void Draw(Game1 game)
         {

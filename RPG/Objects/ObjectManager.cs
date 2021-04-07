@@ -9,7 +9,7 @@ namespace RPG.Objects
         public List<DynamicObject> dynamicObjects = new List<DynamicObject>();
         public GameObject[,] staticObjects;
 
-        public ObjectManager() {}
+        public ObjectManager() { }
 
         public void Draw(Game1 game)
         {
