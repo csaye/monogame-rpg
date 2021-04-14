@@ -32,7 +32,10 @@ namespace RPG
 
             blankTexture = new Texture2D(game.GraphicsDevice, 1, 1);
             blankTexture.SetData(new[] { Color.White });
+        }
 
+        public static void LoadContent(Game1 game)
+        {
             arialFont = game.Content.Load<SpriteFont>("Arial");
 
             PlayerTexture = game.Content.Load<Texture2D>("Sprites/Computeroid");

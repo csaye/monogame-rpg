@@ -48,8 +48,8 @@ namespace RPG
             // Initialize sprite batch
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Load textures
-            Textures.LoadTextures(this);
+            // Load content
+            Drawing.LoadContent(this);
         }
 
         protected override void Update(GameTime gameTime)
