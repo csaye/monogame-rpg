@@ -6,12 +6,12 @@ namespace RPG.Objects
     public class Player : DynamicObject
     {
         private float elapsedTime = 0;
-        private const float frameTime = 0.2f;
+        private const float frameTime = 0.3f;
         private int animFrame = 0;
         private int tilesetIndex = 0;
         private Vector2 lastMovementDirection;
 
-        public Player(float x, float y) : base(x, y, Drawing.Grid, Drawing.Grid, new Vector2(0, 0), 100) { }
+        public Player(float x, float y) : base(x, y, Drawing.Grid, Drawing.Grid, new Vector2(0, 0), 60) { }
 
         public override void Draw(Game1 game)
         {

@@ -28,6 +28,7 @@ namespace RPG
         public TileManager TileManager => CurrentScene.TileManager;
         public UIManager UIManager => CurrentScene.UIManager;
         public Camera Camera => CurrentScene.Camera;
+        public Player Player => CurrentScene.Player;
 
         public Game1()
         {

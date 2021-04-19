@@ -38,8 +38,8 @@ namespace RPG.Objects
         public void AddStatic(GameObject obj)
         {
             // Get object grid position
-            int x = (int)(obj.position.X / Drawing.Grid);
-            int y = (int)(obj.position.Y / Drawing.Grid);
+            int x = (int)(obj.Position.X / Drawing.Grid);
+            int y = (int)(obj.Position.Y / Drawing.Grid);
             // Set grid position to object
             staticObjects[x, y] = obj;
         }
@@ -48,7 +48,7 @@ namespace RPG.Objects
         public Vector2 TryMove(GameObject movingObj, Vector2 movementFactor)
         {
             // Get position
-            Vector2 position = movingObj.position + movementFactor;
+            Vector2 position = movingObj.Position + movementFactor;
             // Get new bounds
             Rectangle newBounds = movingObj.Bounds;
             newBounds.X += (int)movementFactor.X;

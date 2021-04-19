@@ -1,19 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
-using RPG.Objects;
 using System;
 
 namespace RPG
 {
     public class Camera
     {
-        public GameObject Target { get; set; }
         public Matrix Transform { get; private set; }
         public Vector2 Position { get; private set; }
 
-        public Camera(GameObject target)
-        {
-            Target = target;
-        }
+        public Camera() { }
 
         public void Update(GameTime gameTime, Game1 game)
         {
@@ -26,9 +21,12 @@ namespace RPG
             int sceneWidth = game.CurrentScene.Width;
             int sceneHeight = game.CurrentScene.Height;
 
+            Vector2 playerPosition = game.Player.Position;
+            Vector2 playerSize = game.Player.Size;
+
             // Clamp target within scene bounds
-            int targetX = Math.Clamp((int)(Target.position.X + (Target.size.X / 2)), midWidth, sceneWidth - midWidth);
-            int targetY = Math.Clamp((int)(Target.position.Y + (Target.size.Y / 2)), midHeight, sceneHeight - midHeight);
+            int targetX = Math.Clamp((int)(playerPosition.X + (playerSize.X / 2)), midWidth, sceneWidth - midWidth);
+            int targetY = Math.Clamp((int)(playerPosition.Y + (playerSize.Y / 2)), midHeight, sceneHeight - midHeight);
             
             // Set position
             Position = new Vector2(targetX - midWidth, targetY - midHeight);

@@ -4,8 +4,11 @@ namespace RPG
 {
     public abstract class Object
     {
-        public Vector2 position;
-        public Vector2 size;
+        protected Vector2 position;
+        protected Vector2 size;
+
+        public Vector2 Position => position;
+        public Vector2 Size => size;
 
         public Rectangle Bounds
         {
