@@ -7,6 +7,7 @@ namespace RPG.Scenes
         public Menu()
         {
             // Initialize UI
+            UIManager = new UIManager();
             Button loadButton = new Button(Drawing.Width / 2, Drawing.Height / 2, 128, 32, "Click to start", LoadMain);
             UIManager.Add(loadButton);
             Button quitButton = new Button(Drawing.Grid / 2, Drawing.Grid / 2, Drawing.Grid / 2, Drawing.Grid / 2, "X", QuitGame);

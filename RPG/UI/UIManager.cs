@@ -9,7 +9,7 @@ namespace RPG.UI
 
         public void Add(UIObject obj) => uiObjects.Add(obj); // Adds UI object to list
 
-        public void Draw(Game1 game)
+        public void DrawUI(Game1 game)
         {
             // Draw all UI objects
             foreach (UIObject obj in uiObjects) obj.Draw(game);

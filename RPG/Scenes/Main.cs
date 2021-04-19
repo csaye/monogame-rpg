@@ -49,18 +49,21 @@ namespace RPG.Scenes
             Height = tilesHeight * Grid;
 
             // Initialize tiles
+            TileManager = new TileManager();
             TileManager.InitTiles(tiles);
 
             // Initialize objects
+            ObjectManager = new ObjectManager();
             ObjectManager.InitStatic(tilesWidth, tilesHeight);
             ObjectManager.AddStatic(new Rock(2 * Grid, 2 * Grid));
-            
+
             // Initialize player and camera
-            Player player = new Player(0, 0);
-            ObjectManager.AddDynamic(player);
-            Camera = new Camera(player);
+            Player = new Player(0, 0);
+            ObjectManager.AddDynamic(Player);
+            Camera = new Camera();
 
             // Initialize UI
+            UIManager = new UIManager();
             Button backButton = new Button(Grid / 2, Grid / 2, Grid / 2, Grid / 2, "X", LoadMenu);
             UIManager.Add(backButton);
         }
