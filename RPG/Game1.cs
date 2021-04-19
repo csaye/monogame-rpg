@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RPG.Objects;
 using RPG.Scenes;
+using RPG.Tiles;
+using RPG.UI;
 
 namespace RPG
 {
@@ -12,6 +14,7 @@ namespace RPG
         public GraphicsDeviceManager Graphics { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
         public KeyboardState KeyboardState { get; private set; }
+        public KeyboardState LastKeyboardState { get; private set; }
         public MouseState MouseState { get; private set; }
         public MouseState LastMouseState { get; private set; }
         public bool LeftMouseButtonClick { get; private set; }
@@ -20,10 +23,11 @@ namespace RPG
         public SceneManager SceneManager { get; } = new SceneManager();
 
         // Getters
-        public ObjectManager ObjectManager
-        {
-            get { return SceneManager.CurrentScene.ObjectManager; }
-        }
+        public Scene CurrentScene => SceneManager.CurrentScene;
+        public ObjectManager ObjectManager => CurrentScene.ObjectManager;
+        public TileManager TileManager => CurrentScene.TileManager;
+        public UIManager UIManager => CurrentScene.UIManager;
+        public Camera Camera => CurrentScene.Camera;
 
         public Game1()
         {
@@ -55,6 +59,7 @@ namespace RPG
         protected override void Update(GameTime gameTime)
         {
             // Process keyboard state
+            LastKeyboardState = KeyboardState;
             KeyboardState = Keyboard.GetState();
             ProcessKeyboardState();
 
@@ -75,7 +80,7 @@ namespace RPG
             GraphicsDevice.Clear(Color.Black);
 
             // Object sprite batch
-            Matrix? transform = SceneManager.CurrentScene.Camera?.Transform;
+            Matrix? transform = Camera?.Transform;
             SpriteBatch.Begin(SpriteSortMode. BackToFront,null, SamplerState.PointClamp, transformMatrix: transform);
             SceneManager.Draw(this);
             SpriteBatch.End();
@@ -88,10 +93,25 @@ namespace RPG
             base.Draw(gameTime);
         }
 
+        // Switches current scene to given scene
+        public void LoadScene(Scene scene)
+        {
+            SceneManager.CurrentScene = scene;
+        }
+
+        // Returns whether given key is down
+        public bool KeyDown(Keys key) => KeyboardState.IsKeyDown(key);
+
+        // Returns whether given key was pressed
+        public bool KeyPressed(Keys key) => LastKeyboardState.IsKeyDown(key) && !KeyboardState.IsKeyDown(key);
+
         private void ProcessKeyboardState()
         {
             // Exit game
-            if (KeyboardState.IsKeyDown(Keys.Escape)) Exit();
+            if (KeyDown(Keys.Escape)) Exit();
+
+            // Toggle fullscreen
+            if (KeyPressed(Keys.F)) Graphics.ToggleFullScreen();
         }
 
         private void ProcessMouseState()

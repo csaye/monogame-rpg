@@ -16,7 +16,7 @@ namespace RPG.Scenes
         private void LoadMain(Game1 game)
         {
             // Load main scene
-            game.SceneManager.CurrentScene = new Main();
+            game.LoadScene(new Main());
         }
 
         private void QuitGame(Game1 game) => game.Exit();

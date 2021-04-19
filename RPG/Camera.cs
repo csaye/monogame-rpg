@@ -18,13 +18,13 @@ namespace RPG
         public void Update(GameTime gameTime, Game1 game)
         {
             // If no camera in scene, return
-            if (game.SceneManager.CurrentScene.Camera == null) return;
+            if (game.Camera == null) return;
 
             // Get screen mid dimensions and scene dimensions
             int midWidth = Drawing.Width / 2;
             int midHeight = Drawing.Height / 2;
-            int sceneWidth = game.SceneManager.CurrentScene.Width;
-            int sceneHeight = game.SceneManager.CurrentScene.Height;
+            int sceneWidth = game.CurrentScene.Width;
+            int sceneHeight = game.CurrentScene.Height;
 
             // Clamp target within scene bounds
             int targetX = Math.Clamp((int)(Target.position.X + (Target.size.X / 2)), midWidth, sceneWidth - midWidth);

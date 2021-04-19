@@ -25,8 +25,8 @@ namespace RPG.Objects
             position = game.ObjectManager.TryMove(this, movementFactor);
 
             // Constrain to scene bounds
-            int sceneWidth = game.SceneManager.CurrentScene.Width;
-            int sceneHeight = game.SceneManager.CurrentScene.Height;
+            int sceneWidth = game.CurrentScene.Width;
+            int sceneHeight = game.CurrentScene.Height;
             position.X = Math.Clamp(position.X, 0, sceneWidth - size.X);
             position.Y = Math.Clamp(position.Y, 0, sceneHeight - size.Y);
         }
