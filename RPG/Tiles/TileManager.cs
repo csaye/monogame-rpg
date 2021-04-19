@@ -1,25 +1,42 @@
-﻿namespace RPG.Tiles
+﻿using Microsoft.Xna.Framework;
+using System;
+
+namespace RPG.Tiles
 {
     public class TileManager
     {
-        public Tile[,] Tiles { get; private set; }
+        public byte[,] Tiles { get; private set; }
+
+        private const int Grid = Drawing.Grid;
 
         public TileManager() { }
 
         public void Draw(Game1 game)
         {
-            // If no tiles, return
-            if (Tiles == null) return;
+            // If no camera, return
+            if (game.Camera == null) return;
 
-            // Draw all tiles
-            foreach (Tile tile in Tiles)
+            // Get camera view bounds
+            Vector2 cameraPosition = game.Camera.Position / Drawing.Grid;
+            int minX = (int)Math.Floor(cameraPosition.X);
+            int minY = (int)Math.Floor(cameraPosition.Y);
+            int maxX = Math.Min(minX + Drawing.GridWidth, Tiles.GetLength(1) - 1);
+            int maxY = Math.Min(minY + Drawing.GridHeight, Tiles.GetLength(0) - 1);
+
+            // Draw all tiles visible by camera
+            for (int x = minX; x <= maxX; x++)
             {
-                tile.Draw(game);
+                for (int y = minY; y <= maxY; y++)
+                {
+                    byte tile = Tiles[x, y];
+                    Rectangle rect = new Rectangle(x * Grid, y * Grid, Grid, Grid);
+                    Drawing.DrawTile(Drawing.TilesetTexture, tile, rect, game, SortingLayers.Tiles);
+                }
             }
         }
 
-        public void InitTiles(int x, int y) => Tiles = new Tile[x, y]; // Initializes tile array with given dimensions
-        public Tile GetTile(int x, int y) => Tiles[x, y]; // Gets tile at position
-        public void SetTile(int x, int y, Tile tile) => Tiles[x, y] = tile; // Sets given position to given tile
+        public void InitTiles(byte[,] tiles) => Tiles = tiles; // Initializes tile array
+        public Tile GetTile(int x, int y) => (Tile)Tiles[x, y]; // Gets tile at position
+        public void SetTile(int x, int y, Tile tile) => Tiles[x, y] = (byte)tile; // Sets given position to given tile
     }
 }
