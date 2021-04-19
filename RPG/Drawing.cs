@@ -20,7 +20,7 @@ namespace RPG
         private static Texture2D blankTexture;
         private static SpriteFont arialFont;
 
-        public static Texture2D TilesTexture { get; private set; }
+        public static Texture2D TilesetTexture { get; private set; }
         public static Texture2D RockTexture { get; private set; }
         public static Texture2D PlayerTexture { get; private set; }
 
@@ -39,7 +39,7 @@ namespace RPG
             arialFont = game.Content.Load<SpriteFont>("Arial");
 
             PlayerTexture = game.Content.Load<Texture2D>("Sprites/Computeroid");
-            TilesTexture = game.Content.Load<Texture2D>("Tiles");
+            TilesetTexture = game.Content.Load<Texture2D>("Tileset");
             RockTexture = game.Content.Load<Texture2D>("Rock");
         }
 

@@ -44,7 +44,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Computeroid.png
 
-#begin Tiles.png
+#begin Tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -54,5 +54,4 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Tiles.png
-
+/build:Tileset.png
