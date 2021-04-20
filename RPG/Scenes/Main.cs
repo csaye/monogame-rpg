@@ -10,6 +10,8 @@ namespace RPG.Scenes
     {
         private const int Grid = Drawing.Grid;
 
+        private readonly Transition Transition;
+
         private readonly byte[,] tiles = new byte[,]
         {
             {0,5,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0},
@@ -66,11 +68,17 @@ namespace RPG.Scenes
             UIManager = new UIManager();
             Button backButton = new Button(Grid / 2, Grid / 2, Grid / 2, Grid / 2, "X", LoadMenu);
             UIManager.Add(backButton);
+
+            // Initialize transition
+            Rectangle transitionBounds = new Rectangle(Width - Grid, 0, Grid, Height);
+            Transition = new Transition(transitionBounds, new River());
         }
 
         public override void Update(GameTime gameTime, Game1 game)
         {
             ProcessMouseState(game);
+
+            Transition.Update(game); // Update transition
 
             base.Update(gameTime, game);
         }
